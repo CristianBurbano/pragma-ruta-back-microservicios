@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -18,22 +18,22 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./apps/pragma-back-microservicios/test/jest-e2e.json",
     "typeorm": "ts-node --r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migrations:generate": "npm run typeorm -- migration:generate -n",
     "migrations:run": "npm run typeorm -- migration:run",
     "migrations:show": "npm run typeorm -- migration:show"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.199.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "^1.2.0",
-    "@nestjs/microservices": "^9.1.6",
+    "@nestjs/microservices": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.1.2",
     "@nestjs/typeorm": "^9.0.1",
+    "aws-sdk": "^2.1249.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "joi": "^17.6.4",
@@ -83,6 +83,9 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/apps/"
+    ]
   }
 }

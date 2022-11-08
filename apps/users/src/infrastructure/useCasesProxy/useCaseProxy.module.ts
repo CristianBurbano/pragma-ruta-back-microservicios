@@ -1,14 +1,16 @@
 import { Module, Provider } from '@nestjs/common';
-import { ImagesModule } from 'src/Images/images.module';
-import { addImageUseCases } from 'src/Images/usecases/addImage.usecases';
-import { deleteImageUseCases } from 'src/Images/usecases/deleteImage.usecases';
-import { addUserUseCases } from 'src/Users/usecases/addUser.usecases';
-import { deleteUserUseCases } from 'src/Users/usecases/deleteUser.usecases';
-import { getUserUseCases } from 'src/Users/usecases/getUser.usecases';
-import { getUsersUseCases } from 'src/Users/usecases/getUsers.usecases';
-import { updateUserUseCases } from 'src/Users/usecases/updateUser.usecases';
+
+import { addUserUseCases } from '../../usecases/addUser.usecases';
+import { deleteUserUseCases } from '../../usecases/deleteUser.usecases';
+import { getUserUseCases } from '../../usecases/getUser.usecases';
+import { getUsersUseCases } from '../../usecases/getUsers.usecases';
+import { updateUserUseCases } from '../../usecases/updateUser.usecases';
 import { RepositoriesModule } from '../repositories/repositories.module';
 import { UserRepository } from '../repositories/userRepository.service';
+
+import { ImagesModule } from '../../../../images/src/images.module';
+import { addImageUseCases } from '../../../../images/src/usecases/addImage.usecases';
+import { deleteImageUseCases } from '../../../../images/src/usecases/deleteImage.usecases';
 
 const injectables = [
   {

@@ -1,4 +1,4 @@
-import { addImageUseCases } from 'src/Images/usecases/addImage.usecases';
+import { addImageUseCases } from '../../../images/src/usecases/addImage.usecases';
 import { User } from '../domain/model/user';
 import { IuserRepository } from '../domain/repositories/userRepository.interface';
 

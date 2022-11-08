@@ -1,4 +1,4 @@
-import { deleteImageUseCases } from 'src/Images/usecases/deleteImage.usecases';
+import { deleteImageUseCases } from '../../../images/src/usecases/deleteImage.usecases';
 import { IuserRepository } from '../domain/repositories/userRepository.interface';
 
 export class deleteUserUseCases {
