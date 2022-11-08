@@ -7,12 +7,14 @@ import { RepositoriesModule } from './infrastructure/repositories/repositories.m
 import { UseCaseProxyModule } from './infrastructure/useCasesProxy/useCaseProxy.module';
 import { environtments, schema } from 'environments/environments';
 import config from 'environments/config';
+import { CommonModule } from 'apps/common/src/common.module';
 
 @Module({
   imports: [
     PersonalConfig,
     RepositoriesModule,
     UseCaseProxyModule,
+    CommonModule,
     ConfigModule.forRoot({
       envFilePath:
         'environments/' + (environtments[process.env.NODE_ENV] || '.env'),

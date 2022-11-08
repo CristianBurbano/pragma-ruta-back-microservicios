@@ -16,7 +16,7 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { getUsersUseCases } from '../../usecases/getUsers.usecases';
-import { getUserUseCases } from '../../usecases/getUser.usecases';
+import { consultUserUseCases } from '../../usecases/consultUser.usecases';
 import { deleteUserUseCases } from '../../usecases/deleteUser.usecases';
 import { updateUserUseCases } from '../../usecases/updateUser.usecases';
 import { addUserUseCases } from '../../usecases/addUser.usecases';
@@ -80,7 +80,7 @@ export class UsersController {
   }
 
   constructor(
-    private getUserUseCase: getUserUseCases,
+    private getUserUseCase: consultUserUseCases,
     private getUsersUseCase: getUsersUseCases,
     private updateUserUseCase: updateUserUseCases,
     private deleteUserUseCase: deleteUserUseCases,
