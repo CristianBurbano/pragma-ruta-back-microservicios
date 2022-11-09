@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { plainToInstance } from 'class-transformer';
 
 import { UserRepository } from '../../src/infrastructure/repositories/userRepository.service';
 import { Persona } from '../../src/infrastructure/entities/persona.entity';
@@ -50,7 +49,7 @@ describe('Servicio de Repositorio de Usuarios', () => {
   });
   describe('Eliminar Usuario', () => {
     it('debería llamar al metodo eliminar del repositorio', async () => {
-      const persona = plainToInstance(Persona, personaEntityMock);
+      // const persona = plainToInstance(Persona, personaEntityMock);
       jest
         .spyOn(service, 'getUserById')
         .mockResolvedValueOnce(personaEntityMock);

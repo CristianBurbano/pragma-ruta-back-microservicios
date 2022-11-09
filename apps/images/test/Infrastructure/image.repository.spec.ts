@@ -87,9 +87,7 @@ describe('Servicio de Repositorio de Imagen', () => {
     it('Findentity debería lanzar un error NotFound', async () => {
       jest.spyOn(imageRepository, 'findOne').mockResolvedValueOnce(null);
       try {
-        const result = await (service as any).findEntity(
-          '6356f1ee95fdf04a2420c90e',
-        );
+        await (service as any).findEntity('6356f1ee95fdf04a2420c90e');
       } catch (e) {
         expect(e).toBeInstanceOf(NotFoundException);
       }
