@@ -8,6 +8,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
@@ -20,21 +21,21 @@ import { updateImageUseCases } from '../../usecases/updateImage.usecases';
 @Controller('images')
 export class ImagesController {
   @ApiOperation({ summary: 'Obtener las imagenes' })
-  @Get()
+  @MessagePattern({ cmd: 'getImages' })
   getImages() {
     return this.getImgUseCases.exec();
   }
 
   @ApiOperation({ summary: 'Crear una imagen' })
-  @UseInterceptors(FileInterceptor('file'))
-  @Post()
-  createImage(@UploadedFile() file: Express.Multer.File) {
+  @MessagePattern({ cmd: 'uploadImage' })
+  createImage(file: any) {
+    console.log(file);
     return this.addImgUseCases.execute(file);
   }
 
   @ApiOperation({ summary: 'Obtener una imagen por su ID' })
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @MessagePattern({ cmd: 'getImage' })
+  findOne(id: string) {
     return this.getImgUseCases.byId(id);
   }
 
@@ -49,8 +50,8 @@ export class ImagesController {
   }
 
   @ApiOperation({ summary: 'Eliminar Imagen' })
-  @Delete(':id')
-  deleteImage(@Param('id') id: string) {
+  @MessagePattern({ cmd: 'deleteImage' })
+  deleteImage(id: string) {
     return this.deleteImgUseCases.exec(id);
   }
 

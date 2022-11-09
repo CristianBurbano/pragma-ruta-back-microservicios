@@ -1,35 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
+import { Injectable, Inject } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { ImageServiceInterface } from '../../domain/services/images.interface';
-import FormData = require('form-data');
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class ImageService implements ImageServiceInterface {
-  url = 'http://localhost:3005';
-  constructor(private http: HttpService) {}
+  constructor(@Inject('IMAGE_SERVICE') private imageService: ClientProxy) {}
 
   async getImage(id: string): Promise<any> {
-    const query = await firstValueFrom(
-      this.http.get(this.url + `/images/${id}`),
+    const result = await firstValueFrom(
+      this.imageService.send({ cmd: 'getImage' }, id),
     );
+    console.log('resultado de get image', result);
 
-    return query.data?.data;
+    return result;
   }
 
   async deleteImage(id: string): Promise<void> {
-    await firstValueFrom(this.http.delete(this.url + `/images/${id}`));
+    await firstValueFrom(this.imageService.send({ cmd: 'deleteImage' }, id));
   }
 
   async uploadImage(file: Express.Multer.File): Promise<any> {
-    const formData = new FormData();
-    formData.append('file', Buffer.from(file.buffer), file.originalname);
-    const query = await firstValueFrom(
-      this.http.post(this.url + `/images/`, formData, {
-        headers: formData.getHeaders(),
-      }),
+    const result = await firstValueFrom(
+      this.imageService.send({ cmd: 'uploadImage' }, file),
     );
-
-    return query.data?.data;
+    return result;
   }
 }

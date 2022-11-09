@@ -1,5 +1,6 @@
 import { Module, Provider } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { addUserUseCases } from '../../usecases/addUser.usecases';
 import { deleteUserUseCases } from '../../usecases/deleteUser.usecases';
@@ -43,7 +44,13 @@ const injectables = [
 ];
 
 @Module({
-  imports: [RepositoriesModule, HttpModule],
+  imports: [
+    RepositoriesModule,
+    HttpModule,
+    ClientsModule.register([
+      { name: 'IMAGE_SERVICE', transport: Transport.TCP },
+    ]),
+  ],
   providers: [
     ...injectables.map(
       (p) =>

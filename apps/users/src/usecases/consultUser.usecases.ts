@@ -8,8 +8,10 @@ export class consultUserUseCases {
     private readonly imageService: ImageServiceInterface,
   ) {}
   private async getUserWithImage(user) {
-    const image = await this.imageService.getImage(user.photo);
-    user.photo = image;
+    if (user?.photo) {
+      const image = await this.imageService.getImage(user.photo);
+      user.photo = image;
+    }
     return user;
   }
   async byId(id: number): Promise<User> {

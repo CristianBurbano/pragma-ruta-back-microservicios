@@ -16,7 +16,7 @@ export class FileRepository implements IFileRepository {
       .upload({
         Bucket: bucket,
         Key: name,
-        Body: file.buffer,
+        Body: Buffer.from((file.buffer as any).data),
         ContentType: file.mimetype,
       })
       .promise();
