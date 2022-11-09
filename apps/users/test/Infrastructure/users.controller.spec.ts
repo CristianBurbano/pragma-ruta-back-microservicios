@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { addUserUseCases } from '../../src/Users/usecases/addUser.usecases';
-import { deleteUserUseCases } from '../../src/Users/usecases/deleteUser.usecases';
-import { getUserUseCases } from '../../src/Users/usecases/getUser.usecases';
-import { updateUserUseCases } from '../../src/Users/usecases/updateUser.usecases';
-import { UsersController } from '../../src/Users/infrastructure/controllers/users.controller';
-import { getUsersUseCases } from '../../src/Users/usecases/getUsers.usecases';
-import { FILE, USERS, USERS_RESPONSE } from '../../mocks/users';
+import { addUserUseCases } from '../../src/usecases/addUser.usecases';
+import { deleteUserUseCases } from '../../src/usecases/deleteUser.usecases';
+import { updateUserUseCases } from '../../src/usecases/updateUser.usecases';
+import { UsersController } from '../../src/infrastructure/controllers/users.controller';
+import { getUsersUseCases } from '../../src/usecases/getUsers.usecases';
+import { FILE, USERS, USERS_RESPONSE } from '../mocks/users';
+import { consultUserUseCases } from '../../src/usecases/consultUser.usecases';
 
 describe('Rutas de Usuario', () => {
   let controller: UsersController;
-  let getUserUC: getUserUseCases;
+  let getUserUC: consultUserUseCases;
   let getUsersUC: getUsersUseCases;
   let updateUserUC: updateUserUseCases;
   let addUserUC: addUserUseCases;
@@ -20,7 +20,7 @@ describe('Rutas de Usuario', () => {
       controllers: [UsersController],
       providers: [
         {
-          provide: getUserUseCases,
+          provide: consultUserUseCases,
           useValue: { exec: jest.fn(), byDocument: jest.fn() },
         },
         {
@@ -39,7 +39,7 @@ describe('Rutas de Usuario', () => {
 
     controller = module.get<UsersController>(UsersController);
 
-    getUserUC = module.get<getUserUseCases>(getUserUseCases);
+    getUserUC = module.get<consultUserUseCases>(consultUserUseCases);
     getUsersUC = module.get<getUsersUseCases>(getUsersUseCases);
     updateUserUC = module.get<updateUserUseCases>(updateUserUseCases);
     addUserUC = module.get<addUserUseCases>(addUserUseCases);

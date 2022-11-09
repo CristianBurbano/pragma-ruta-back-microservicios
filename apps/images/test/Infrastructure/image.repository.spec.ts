@@ -5,8 +5,8 @@ import { ObjectID } from 'mongodb';
 import { plainToInstance } from 'class-transformer';
 import { NotFoundException } from '@nestjs/common';
 
-import { ImageRepository } from '../../src/Images/infrastructure/repositories/imageRepository.service';
-import { Imagen } from '../../src/Images/infrastructure/entities/imagen.entity';
+import { ImageRepository } from '../../src/infrastructure/repositories/imageRepository.service';
+import { Imagen } from '../../src/infrastructure/entities/imagen.entity';
 
 describe('Servicio de Repositorio de Imagen', () => {
   let service: ImageRepository;

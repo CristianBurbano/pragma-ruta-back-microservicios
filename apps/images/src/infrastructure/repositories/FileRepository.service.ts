@@ -28,7 +28,7 @@ export class FileRepository implements IFileRepository {
   }
 
   async delete(filename: string): Promise<void> {
-    const result = await this.client
+    await this.client
       .deleteObject({
         Bucket: 'pragma-ruta-back-clean-architecture-cristian-burbano',
         Key: filename,

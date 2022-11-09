@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ImagesController } from '../../src/Images/infrastructure/controllers/images.controller';
-import { addImageUseCases } from '../../src/Images/usecases/addImage.usecases';
-import { updateImageUseCases } from '../../src/Images/usecases/updateImage.usecases';
-import { deleteImageUseCases } from '../../src/Images/usecases/deleteImage.usecases';
-import { getImagesUseCases } from '../../src/Images/usecases/getImage.usecases';
-import { FILE, IMAGEMOCK } from '../../mocks/images';
+import { ImagesController } from '../../src/infrastructure/controllers/images.controller';
+import { addImageUseCases } from '../../src/usecases/addImage.usecases';
+import { updateImageUseCases } from '../../src/usecases/updateImage.usecases';
+import { deleteImageUseCases } from '../../src/usecases/deleteImage.usecases';
+import { getImagesUseCases } from '../../src/usecases/getImage.usecases';
+import { FILE, IMAGEMOCK } from '../mocks/images';
 
 describe('ImagesController', () => {
   let controller: ImagesController;

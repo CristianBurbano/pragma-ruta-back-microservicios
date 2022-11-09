@@ -3,8 +3,8 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 
-import { Persona } from '../../src/Users/infrastructure/entities/persona.entity';
-import { UserRepository } from '../../src/Users/infrastructure/repositories/userRepository.service';
+import { UserRepository } from '../../src/infrastructure/repositories/userRepository.service';
+import { Persona } from '../../src/infrastructure/entities/persona.entity';
 
 describe('Servicio de Repositorio de Usuarios', () => {
   let service: UserRepository;

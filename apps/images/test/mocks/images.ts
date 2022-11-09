@@ -1,4 +1,4 @@
-import { Image } from 'src/Images/domain/model/Image';
+import { Image } from '../../src/domain/model/Image';
 
 export const IMAGEMOCK: Image = {
   id: 'dfdfeidfjdkdfd',

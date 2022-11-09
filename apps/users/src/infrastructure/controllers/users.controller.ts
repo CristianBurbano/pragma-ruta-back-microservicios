@@ -16,14 +16,22 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { getUsersUseCases } from '../../usecases/getUsers.usecases';
-import { consultUserUseCases } from '../../usecases/consultUser.usecases';
 import { deleteUserUseCases } from '../../usecases/deleteUser.usecases';
 import { updateUserUseCases } from '../../usecases/updateUser.usecases';
 import { addUserUseCases } from '../../usecases/addUser.usecases';
+import { consultUserUseCases } from '../../usecases/consultUser.usecases';
 
 @ApiTags('Usuarios')
 @Controller('users')
 export class UsersController {
+  constructor(
+    private getUsersUseCase: getUsersUseCases,
+    private updateUserUseCase: updateUserUseCases,
+    private deleteUserUseCase: deleteUserUseCases,
+    private createUserUseCase: addUserUseCases,
+    private consultUser: consultUserUseCases,
+  ) {}
+
   @ApiOperation({ summary: 'Consulta de los Usuarios' })
   @Get()
   getUsers(
@@ -32,17 +40,11 @@ export class UsersController {
     @Query('minAge') minAge?: number,
     @Query('maxAge') maxAge?: number,
   ) {
-    if (!isNaN(type) && type != null && document) {
-      return this.getUserUseCase.byDocument(type, document);
-    } else {
-      if (document) {
-        return this.getUsersUseCase.getByDocument(document);
-      } else {
-        if (maxAge || minAge) {
-          return this.getUsersUseCase.getByAge(minAge, maxAge);
-        } else return this.getUsersUseCase.execute();
-      }
-    }
+    if (!isNaN(type) && type != null && document)
+      return this.consultUser.byDocument(type, document);
+    if (document) return this.getUsersUseCase.getByDocument(document);
+    if (maxAge || minAge) return this.getUsersUseCase.getByAge(minAge, maxAge);
+    return this.getUsersUseCase.execute();
   }
 
   @ApiOperation({ summary: 'Crear Usuario' })
@@ -59,7 +61,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Obtener Usuario por Id' })
   @Get(':id')
   getUser(@Param('id', ParseIntPipe) id: number) {
-    return this.getUserUseCase.byId(id);
+    return this.consultUser.byId(id);
   }
 
   @ApiOperation({ summary: 'Modificar propiedades del usuario' })
@@ -78,12 +80,4 @@ export class UsersController {
     await this.deleteUserUseCase.exec(id);
     return 'success';
   }
-
-  constructor(
-    private getUserUseCase: consultUserUseCases,
-    private getUsersUseCase: getUsersUseCases,
-    private updateUserUseCase: updateUserUseCases,
-    private deleteUserUseCase: deleteUserUseCases,
-    private createUserUseCase: addUserUseCases,
-  ) {}
 }

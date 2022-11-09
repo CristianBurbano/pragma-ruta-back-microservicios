@@ -1,4 +1,3 @@
-import { deleteImageUseCases } from '../../../images/src/usecases/deleteImage.usecases';
 import { IuserRepository } from '../domain/repositories/userRepository.interface';
 import { ImageServiceInterface } from '../domain/services/images.interface';
 

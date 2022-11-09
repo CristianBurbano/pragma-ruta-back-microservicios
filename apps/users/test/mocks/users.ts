@@ -1,5 +1,5 @@
-import { CreateUserDto } from 'src/Users/infrastructure/controllers/users.dto';
-import { typeDocument, User } from '../src/Users/domain/model/user';
+import { typeDocument, User } from '../../src/domain/model/user';
+import { CreateUserDto } from '../../src/infrastructure/controllers/users.dto';
 
 const date = new Date();
 
